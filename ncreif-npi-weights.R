@@ -1,10 +1,18 @@
 # Derek Underwood
 # script to pull NCREIF npi data from: https://user.ncreif.org/data-products/property/
 
+# Install libraries if not installed
+{
+  list.of.packages <- c("jsonlite",
+                        "data.table")
+  new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+  if(length(new.packages)) install.packages(new.packages)
+}
+
 library(jsonlite)
 library(data.table)
-url <- "https://user.ncreif.org/api/v1/products/data-map/NPI"
 
+url <- "https://user.ncreif.org/api/v1/products/data-map/NPI"
 data <- fromJSON(url, simplifyDataFrame = T)
 
 data_clean <- data.frame(
